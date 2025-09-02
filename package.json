@@ -1,0 +1,14 @@
+{
+  "name": "unmuteindia-website",
+  "version": "1.0.0",
+  "description": "UnmuteIndia - Education Beyond Barriers",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "start": "python -m http.server 8080"
+  },
+  "keywords": ["education", "india", "social-change"],
+  "author": "UnmuteIndia",
+  "license": "MIT",
+  "type": "module"
+}
