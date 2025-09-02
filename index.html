@@ -3,233 +3,917 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UnmuteIndia</title>
+  <title>UnmuteIndia - Education Beyond Barriers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    :root {
+      --primary-600: #1e40af;
+      --primary-700: #1d4ed8;
+      --primary-800: #1e3a8a;
+      --primary-900: #1e3a8a;
+      --accent-500: #f59e0b;
+      --accent-600: #d97706;
+      --success-500: #10b981;
+      --warning-500: #f59e0b;
+      --error-500: #ef4444;
+      --neutral-50: #f8fafc;
+      --neutral-100: #f1f5f9;
+      --neutral-200: #e2e8f0;
+      --neutral-300: #cbd5e1;
+      --neutral-400: #94a3b8;
+      --neutral-500: #64748b;
+      --neutral-600: #475569;
+      --neutral-700: #334155;
+      --neutral-800: #1e293b;
+      --neutral-900: #0f172a;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      background: #f4f6f9;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
-      color: #333;
+      color: var(--neutral-800);
+      background: var(--neutral-50);
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
     }
 
     /* Hero Section */
     header {
-      color: #fff;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 100px 20px;
-      background: url("unmute.jpg") no-repeat center center/cover;
-      position: relative;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--primary-800) 0%, var(--primary-600) 100%);
+      overflow: hidden;
     }
-    header::after {
-      content: "";
+
+    header::before {
+      content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-    }
-    header h1, header p {
-      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("unmute.jpg") center/cover;
+      opacity: 0.3;
       z-index: 1;
     }
-    header h1 {
-      margin: 0;
-      font-size: 3em;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.9) 0%, rgba(29, 78, 216, 0.8) 100%);
+      z-index: 2;
     }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+      padding: 0 24px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
     header p {
-      font-size: 1.3em;
-      margin-top: 15px;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 400;
+      margin-bottom: 40px;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-600) 100%);
+      color: var(--white);
+      padding: 16px 32px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(0);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(135deg, var(--accent-600) 0%, #b45309 100%);
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     /* Section Styling */
     section {
-      padding: 60px 20px;
+      padding: 80px 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 700;
       text-align: center;
+      margin-bottom: 16px;
+      color: var(--neutral-900);
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      text-align: center;
+      color: var(--neutral-600);
+      margin-bottom: 64px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-bottom: 64px;
     }
 
     .card {
-      background: #fff;
-      padding: 30px;
-      margin: 20px auto;
-      max-width: 900px;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px 32px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      border: 1px solid var(--neutral-200);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-600), var(--accent-500));
+      transform: scaleX(0);
       transition: transform 0.3s ease;
     }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
     .card:hover {
-      transform: translateY(-5px);
-    }
-    .card h2 {
-      color: #007BFF;
-      margin-bottom: 15px;
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary-200);
     }
 
-    /* Form Styling */
-    form {
-      max-width: 700px;
-      margin: 30px auto;
-      text-align: left;
-      background: #fff;
-      padding: 25px;
+    .card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-700);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
       border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
     }
 
-    form input, form select, form textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1em;
+    .card p {
+      color: var(--neutral-600);
+      line-height: 1.7;
+      font-size: 1rem;
     }
-    form input::placeholder{
-      font-weight: 300;
-      color: #222;
+
+    /* Form Section */
+    .form-section {
+      background: var(--white);
+      margin: 80px 0;
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .form-header {
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+      color: var(--white);
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .form-header h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .form-header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    form {
+      padding: 48px 32px;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    form label {
+      font-weight: 500;
+      color: var(--neutral-700);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    form input,
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid var(--neutral-200);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: var(--white);
+      margin: 0;
+    }
+
+    form input:focus,
+    form select:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: var(--primary-500);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      transform: translateY(-1px);
+    }
+
+    form input::placeholder,
+    form textarea::placeholder {
+      color: var(--neutral-400);
+      font-weight: 400;
+    }
+
+    form textarea {
+      min-height: 120px;
+      resize: vertical;
+      font-family: inherit;
     }
 
     form button {
       width: 100%;
-      padding: 14px;
-      background: #007BFF;
-      color: white;
+      padding: 18px 32px;
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+      color: var(--white);
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 1.1em;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+      margin-top: 16px;
     }
 
     form button:hover {
-      background: #0056b3;
+      background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-800) 100%);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    form button:active {
+      transform: translateY(0);
     }
 
     /* Footer */
     footer {
-      background: #222;
-      color: white;
+      background: var(--neutral-900);
+      color: var(--neutral-300);
+      padding: 48px 24px 32px;
       text-align: center;
-      padding: 30px 15px;
     }
 
-    footer a {
-      color: #1DA1F2;
-      text-decoration: none;
-      font-weight: bold;
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
     }
-    footer a:hover {
-      text-decoration: underline;
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--neutral-300);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+
+    .footer-link:hover {
+      color: var(--white);
+      background: var(--neutral-800);
+      transform: translateY(-2px);
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: var(--neutral-700);
+      margin: 24px 0;
+    }
+
+    .footer-copyright {
+      color: var(--neutral-400);
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 80px 20px;
+        min-height: 80vh;
+      }
+
+      .hero-content {
+        padding: 0 16px;
+      }
+
+      section {
+        padding: 60px 16px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .card {
+        padding: 32px 24px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      form {
+        padding: 32px 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      header p {
+        font-size: 1.1rem;
+      }
+
+      .cta-button {
+        padding: 14px 28px;
+        font-size: 1rem;
+      }
+
+      .card {
+        padding: 24px 20px;
+      }
+
+      .card h3 {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--neutral-300);
+      border-radius: 50%;
+      border-top-color: var(--primary-600);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Success Message */
+    .success-message {
+      background: var(--success-500);
+      color: var(--white);
+      padding: 16px 24px;
+      border-radius: 12px;
+      margin-top: 16px;
+      text-align: center;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .success-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-600), var(--accent-500));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Pulse Animation for CTA */
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+      }
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-indicator::after {
+      content: '↓';
+      font-size: 1.5rem;
+      color: var(--white);
+      opacity: 0.8;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    /* Enhanced Typography */
+    h1, h2, h3, h4, h5, h6 {
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    p {
+      line-height: 1.7;
+    }
+
+    /* Improved Focus States */
+    *:focus-visible {
+      outline: 2px solid var(--primary-500);
+      outline-offset: 2px;
+    }
+
+    /* Selection Styling */
+    ::selection {
+      background: var(--primary-100);
+      color: var(--primary-900);
     }
   </style>
 </head>
 <body>
   <!-- Hero Section -->
   <header>
-    <h1>UnmuteIndia</h1>
-    <p>Make India great above caste – Every child deserves good education</p>
+    <div class="hero-content">
+      <h1>Unmute<span class="gradient-text">India</span></h1>
+      <p>Make India great beyond caste — Every child deserves quality education and equal opportunities</p>
+      <a href="#join" class="cta-button pulse">Join the Movement</a>
+    </div>
+    <div class="scroll-indicator"></div>
   </header>
 
-  <!-- Sections with Card Design -->
-  <section>
-    <div class="card">
-      <h2>What We Do</h2>
-      <p>We are a people-driven movement working to remove caste barriers and provide equal opportunities in education.</p>
-    </div>
-
-    <div class="card">
-      <h2>Our Mission</h2>
-      <p>Our mission is to ensure that every child in India, regardless of caste, has access to quality education and a better future.</p>
-    </div>
-
-    <div class="card">
-      <h2>Why Join Us</h2>
-      <p>Together, we can build an India beyond caste where merit, talent, and dreams shape the future — not discrimination.</p>
+  <!-- Mission Section -->
+  <section class="animate-on-scroll">
+    <div class="container">
+      <h2 class="section-title">Our <span class="gradient-text">Mission</span></h2>
+      <p class="section-subtitle">Building a society where every child has access to quality education, free from barriers of caste and inequality</p>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <h3>
+            <div class="card-icon">🎓</div>
+            Education For All
+          </h3>
+          <p>Providing equal learning opportunities for every child, irrespective of background. We believe education is the foundation of progress and equality.</p>
+        </div>
+        
+        <div class="card">
+          <h3>
+            <div class="card-icon">💪</div>
+            Youth Empowerment
+          </h3>
+          <p>Encouraging young voices to drive positive change and innovation. The future belongs to those who dare to dream and act.</p>
+        </div>
+        
+        <div class="card">
+          <h3>
+            <div class="card-icon">🤝</div>
+            Community Building
+          </h3>
+          <p>Creating platforms to unite people beyond caste and social barriers. Together, we are stronger and more impactful.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Join the Movement -->
-  <section>
-    <h2>Join the Movement</h2>
-    <p>Fill out the form below to be part of UnmuteIndia.</p>
-    <form id="joinForm"
-    action="https://formspree.io/f/xldwwobq"
-    method="post">
-      <input type="text" name="name" placeholder="Full Name" required>
-      <input type="tel" name="phone" placeholder="Phone Number" required>
-      <input type="text" name="voterid" placeholder="Voter ID (if available)">
-      <input type="text" name="location" placeholder="Location" required>
-      <input type="text" name="pincode" placeholder="Area Pincode" required>
-      <select name="state" required>
-        <option value="">Select State</option>
-        <option>Andhra Pradesh</option>
-        <option>Arunachal Pradesh</option>
-        <option>Assam</option>
-        <option>Bihar</option>
-        <option>Chhattisgarh</option>
-        <option>Delhi</option>
-        <option>Goa</option>
-        <option>Gujarat</option>
-        <option>Haryana</option>
-        <option>Himachal Pradesh</option>
-        <option>Jharkhand</option>
-        <option>Karnataka</option>
-        <option>Kerala</option>
-        <option>Madhya Pradesh</option>
-        <option>Maharashtra</option>
-        <option>Manipur</option>
-        <option>Meghalaya</option>
-        <option>Mizoram</option>
-        <option>Nagaland</option>
-        <option>Odisha</option>
-        <option>Punjab</option>
-        <option>Rajasthan</option>
-        <option>Sikkim</option>
-        <option>Tamil Nadu</option>
-        <option>Telangana</option>
-        <option>Tripura</option>
-        <option>Uttar Pradesh</option>
-        <option>Uttarakhand</option>
-        <option>West Bengal</option>
+  <!-- Values Section -->
+  <section class="animate-on-scroll" style="background: var(--white);">
+    <div class="container">
+      <h2 class="section-title">Why <span class="gradient-text">Join Us</span></h2>
+      <p class="section-subtitle">Together, we can build an India beyond caste where merit, talent, and dreams shape the future</p>
       
-      </select>
-      <input type="text" name="subdistrict" placeholder="Sub-District">
-      <textarea name="thoughts" placeholder="What are your thoughts about India?" required></textarea>
-      <textarea name="future" placeholder="How will you build India's future?" required></textarea>
-      <!-- <label>
-        <input type="checkbox" name="political"> I want to be part of a political party
-      </label><br><br> -->
-      <label for="party">Do you want to be part of a Political Party?</label>
-      <select id="party" name="party">
-        <option value="">Optional</option>
-        <option>Yes</option>
-        <option>No</option>
-        <option>Maybe in Future</option>
-      </select>
-      <button type="submit">Join the Movement</button>
-    </form>
+      <div class="cards-grid">
+        <div class="card">
+          <h3>
+            <div class="card-icon">🌟</div>
+            Merit Over Background
+          </h3>
+          <p>We champion a society where talent and hard work determine success, not birth circumstances or social status.</p>
+        </div>
+        
+        <div class="card">
+          <h3>
+            <div class="card-icon">🚀</div>
+            Innovation & Progress
+          </h3>
+          <p>Fostering an environment where new ideas flourish and every individual can contribute to India's growth story.</p>
+        </div>
+        
+        <div class="card">
+          <h3>
+            <div class="card-icon">🌈</div>
+            Inclusive Future
+          </h3>
+          <p>Building bridges across communities and creating opportunities that benefit all Indians, regardless of their background.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Form Section -->
+  <section id="join" class="animate-on-scroll">
+    <div class="container">
+      <div class="form-section">
+        <div class="form-header">
+          <h2>Join the Movement</h2>
+          <p>Be part of the change you want to see in India</p>
+        </div>
+        
+        <form id="joinForm" action="https://formspree.io/f/xldwwobq" method="post">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="voterid">Voter ID</label>
+              <input type="text" id="voterid" name="voterid" placeholder="Optional - if available">
+            </div>
+            
+            <div class="form-group">
+              <label for="location">Location *</label>
+              <input type="text" id="location" name="location" placeholder="City, District" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="pincode">Area Pincode *</label>
+              <input type="text" id="pincode" name="pincode" placeholder="6-digit pincode" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="state">Select State *</label>
+              <select id="state" name="state" required>
+                <option value="">Choose your state</option>
+                <option>Andhra Pradesh</option>
+                <option>Arunachal Pradesh</option>
+                <option>Assam</option>
+                <option>Bihar</option>
+                <option>Chhattisgarh</option>
+                <option>Delhi</option>
+                <option>Goa</option>
+                <option>Gujarat</option>
+                <option>Haryana</option>
+                <option>Himachal Pradesh</option>
+                <option>Jharkhand</option>
+                <option>Karnataka</option>
+                <option>Kerala</option>
+                <option>Madhya Pradesh</option>
+                <option>Maharashtra</option>
+                <option>Manipur</option>
+                <option>Meghalaya</option>
+                <option>Mizoram</option>
+                <option>Nagaland</option>
+                <option>Odisha</option>
+                <option>Punjab</option>
+                <option>Rajasthan</option>
+                <option>Sikkim</option>
+                <option>Tamil Nadu</option>
+                <option>Telangana</option>
+                <option>Tripura</option>
+                <option>Uttar Pradesh</option>
+                <option>Uttarakhand</option>
+                <option>West Bengal</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="subdistrict">Sub-District / Taluka</label>
+              <input type="text" id="subdistrict" name="subdistrict" placeholder="Your sub-district">
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="thoughts">Your Thoughts About India *</label>
+              <textarea id="thoughts" name="thoughts" placeholder="Share your vision for India's future..." required></textarea>
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="future">How Will You Build India's Future? *</label>
+              <textarea id="future" name="future" placeholder="Describe how you want to contribute to India's progress..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="party">Political Party Interest</label>
+              <select id="party" name="party">
+                <option value="">Optional</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Maybe in Future</option>
+              </select>
+            </div>
+          </div>
+          
+          <button type="submit" id="submitBtn">
+            <span class="btn-text">Join the Movement</span>
+            <span class="loading" style="display: none;"></span>
+          </button>
+          
+          <div id="successMessage" class="success-message">
+            ✅ Thank you for joining! Your response has been recorded. Redirecting to our Twitter...
+          </div>
+        </form>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>📧 Email: <a href="mailto:unmuteindiamedia@gmail.com">unmuteindiamedia@gmail.com</a></p>
-    <p>🐦 Twitter: <a href="https://twitter.com/Xunmuteindia" target="_blank">@Xunmuteindia</a></p>
-    <p>&copy; 2025 UnmuteIndia. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="mailto:unmuteindiamedia@gmail.com" class="footer-link">
+          📧 unmuteindiamedia@gmail.com
+        </a>
+        <a href="https://twitter.com/Xunmuteindia" target="_blank" class="footer-link">
+          🐦 @Xunmuteindia
+        </a>
+      </div>
+      <div class="footer-divider"></div>
+      <p class="footer-copyright">&copy; 2025 UnmuteIndia. All rights reserved. Building India's future together.</p>
+    </div>
   </footer>
 
-<script>
-  document.getElementById("joinForm").addEventListener("submit", function(e) {
-    // form normal way submit hoga Formspree pe
-    alert("Thank you for joining! Redirecting to our Twitter...");
+  <script>
+    // Smooth scroll animation observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-    // thoda delay de dete hain taa ki Formspree ko submit hone ka time mil jaaye
-    setTimeout(function() {
-      window.open("https://twitter.com/Xunmuteindia", "_blank");
-    }, 1000);
-  });
-</script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
 
+    // Observe all animated elements
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Enhanced form submission
+    document.getElementById("joinForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = submitBtn.querySelector('.btn-text');
+      const loading = submitBtn.querySelector('.loading');
+      const successMessage = document.getElementById('successMessage');
+      
+      // Show loading state
+      btnText.style.display = 'none';
+      loading.style.display = 'inline-block';
+      submitBtn.disabled = true;
+      
+      // Create FormData for submission
+      const formData = new FormData(this);
+      
+      // Submit to Formspree
+      fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          // Show success message
+          successMessage.classList.add('show');
+          this.reset();
+          
+          // Redirect to Twitter after delay
+          setTimeout(() => {
+            window.open("https://twitter.com/Xunmuteindia", "_blank");
+          }, 2000);
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      })
+      .catch(error => {
+        alert("❌ Error! Please try again or contact us directly.");
+        console.error('Error:', error);
+      })
+      .finally(() => {
+        // Reset button state
+        btnText.style.display = 'inline';
+        loading.style.display = 'none';
+        submitBtn.disabled = false;
+        
+        // Hide success message after delay
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+        }, 5000);
+      });
+    });
+
+    // Smooth scroll for CTA button
+    document.querySelector('.cta-button').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('#join').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+
+    // Add floating animation to cards on hover
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.animation = 'float 3s ease-in-out infinite';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.animation = '';
+      });
+    });
+  </script>
 </body>
 </html>
