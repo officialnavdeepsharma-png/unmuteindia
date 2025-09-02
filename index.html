@@ -219,12 +219,17 @@
     <p>&copy; 2025 UnmuteIndia. All rights reserved.</p>
   </footer>
 
-  <script>
-    document.getElementById("joinForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Thank you for joining! Redirecting to our Twitter...");
+<script>
+  document.getElementById("joinForm").addEventListener("submit", function(e) {
+    // form normal way submit hoga Formspree pe
+    alert("Thank you for joining! Redirecting to our Twitter...");
+
+    // thoda delay de dete hain taa ki Formspree ko submit hone ka time mil jaaye
+    setTimeout(function() {
       window.open("https://twitter.com/Xunmuteindia", "_blank");
-    });
-  </script>
+    }, 1000);
+  });
+</script>
+
 </body>
 </html>
