@@ -762,6 +762,96 @@
         z-index: 1000; /* Ensure toggle is above menu */
       }
     }
+
+    /* Stylish Welcome Popup */
+    .welcome-popup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(30, 64, 175, 0.25);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(.4,2,.3,1);
+    }
+
+    .welcome-popup.show {
+      opacity: 1;
+      pointer-events: auto;
+      animation: popupFadeIn 0.8s cubic-bezier(.4,2,.3,1);
+    }
+
+    @keyframes popupFadeIn {
+      0% { transform: scale(0.8) translateY(40px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .welcome-popup-content {
+      background: rgba(255,255,255,0.85);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(30,64,175,0.18);
+      padding: 40px 32px 32px;
+      text-align: center;
+      max-width: 350px;
+      width: 90%;
+      position: relative;
+      animation: popupContentBounce 1.2s cubic-bezier(.4,2,.3,1);
+    }
+
+    @keyframes popupContentBounce {
+      0% { transform: scale(0.95); }
+      60% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .welcome-popup-content h2 {
+      font-size: 1.7rem;
+      margin-bottom: 16px;
+      font-weight: 700;
+      color: var(--primary-700);
+    }
+
+    .welcome-popup-content p {
+      font-size: 1.1rem;
+      color: var(--neutral-700);
+      margin-bottom: 0;
+      line-height: 1.7;
+    }
+
+    .welcome-popup-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--primary-700);
+      cursor: pointer;
+      transition: color 0.2s;
+      z-index: 1;
+    }
+
+    .welcome-popup-close:hover {
+      color: var(--accent-500);
+    }
+
+    /* Media Queries for Popup */
+    @media (max-width: 480px) {
+      .welcome-popup-content {
+        padding: 24px;
+      }
+
+      .welcome-popup h2 {
+        font-size: 1.5rem;
+      }
+
+      .welcome-popup p {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -971,6 +1061,19 @@
     </div>
   </section>
 
+  <!-- Stylish Welcome Popup -->
+  <div id="welcomePopup" class="welcome-popup">
+    <div class="welcome-popup-content">
+      <button class="welcome-popup-close" aria-label="Close">&times;</button>
+      <h2>🙏 Thanks for visiting <span class="gradient-text">UnmuteIndia</span></h2>
+      <p>
+        Your presence means a lot to us.<br>
+        Together, let's build an India where every dream finds a voice.<br>
+        <span style="font-size:1.5rem;">💛</span>
+      </p>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <div class="footer-content">
@@ -1093,6 +1196,24 @@
       if (window.innerWidth > 768) {
         navbarLinks.classList.remove('show');
       }
+    });
+
+    // Stylish Welcome Popup
+    window.addEventListener('DOMContentLoaded', () => {
+      const popup = document.getElementById('welcomePopup');
+      const closeBtn = popup.querySelector('.welcome-popup-close');
+      setTimeout(() => {
+        popup.classList.add('show');
+      }, 2000);
+
+      closeBtn.addEventListener('click', () => {
+        popup.classList.remove('show');
+      });
+
+      // Optional: close popup on outside click
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) popup.classList.remove('show');
+      });
     });
   </script>
 </body>
