@@ -729,6 +729,9 @@
 
     /* Responsive Navbar */
     @media (max-width: 768px) {
+      .navbar {
+        position: relative; /* Ensure relative positioning for absolute children */
+      }
       .navbar-container {
         padding: 12px 16px;
       }
@@ -744,6 +747,7 @@
         border-radius: 0 0 12px 12px;
         display: none;
         padding: 12px 0;
+        z-index: 999; /* Ensure menu appears above other content */
       }
       .navbar-links.show {
         display: flex;
@@ -755,6 +759,7 @@
       }
       .navbar-toggle {
         display: block;
+        z-index: 1000; /* Ensure toggle is above menu */
       }
     }
   </style>
@@ -1074,19 +1079,17 @@
       
       card.addEventListener('mouseleave', function() {
         this.style.animation = '';
+      });
+    });
 
+    // Navbar toggle for mobile
+    const navbarToggle = document.querySelector('.navbar-toggle');
+    const navbarLinks = document.querySelector('.navbar-links');
+    navbarToggle.addEventListener('click', () => {
+      navbarLinks.classList.toggle('show');
+    });
 
-
-
-
-
-
-
-
-
-
-
-</html></body>  </script>    });      navbarLinks.classList.toggle('show');    navbarToggle.addEventListener('click', () => {    const navbarLinks = document.querySelector('.navbar-links');    const navbarToggle = document.querySelector('.navbar-toggle');    // Navbar toggle for mobile    });      });    window.addEventListener('resize', () => {
+    window.addEventListener('resize', () => {
       if (window.innerWidth > 768) {
         navbarLinks.classList.remove('show');
       }
