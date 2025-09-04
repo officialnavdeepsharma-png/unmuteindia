@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #232526, #414345, #0f2027, #2c5364, #1a2980, #26d0ce, #283e51);
+        background-size: 500% 500%;
+        animation: darkGradientBG 16s ease-in-out infinite;
+      }
+      @keyframes darkGradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        25% {
+          background-position: 50% 100%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        75% {
+          background-position: 50% 0%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      #initiatives {
+        padding: 50px 0;
+        background: linear-gradient(120deg, #232526 60%, #414345 100%);
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+        border-radius: 0 0 32px 32px;
+        animation: fadeInDown 1s;
+        position: relative;
+        overflow: visible; /* changed from hidden to visible */
+      }
+      /* Remove before/after overlays for clarity */
+      #initiatives::before,
+      #initiatives::after {
+        display: none !important;
+        content: none !important;
+      }
+      #initiatives h2 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+        color: #fff;
+        background: linear-gradient(90deg, #26d0ce, #1a2980, #f1c40f);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
+        text-shadow: 0 2px 12px #23252655;
+        animation: glowTitle 2s infinite alternate;
+      }
+      @keyframes glowTitle {
+        0% { text-shadow: 0 2px 12px #23252655; }
+        100% { text-shadow: 0 4px 24px #26d0ce88; }
+      }
+      #initiatives p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        color: #303d8d;
+        position: relative;
+        z-index: 1;
+        text-shadow: 0 1px 6px #23252644;
+        /* animation: fadeInText 1.2s; */ /* Remove animation for clarity */
+      }
+      #initiatives > div {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+      .initiative-card {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        width: 300px;
+        box-shadow: 0 4px 20px rgba(44,62,80,0.12);
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 1s;
+      }
+      .initiative-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+        border: 2px solid #3498db33;
+      }
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(40px);}
+        to { opacity: 1; transform: translateY(0);}
+      }
+      .initiative-card h3 {
+        color: #2c3e50;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      .initiative-card p {
+        color: #1a1a1a; /* Even darker for max contrast */
+        margin: 15px 0;
+        font-size: 1.12rem;
+        font-weight: 600;
+        text-shadow: none; /* Remove shadow for crisp text */
+        background: none; /* Ensure no overlay or blur */
+        filter: none;     /* Remove any accidental blur */
+        opacity: 1;       /* Fully visible */
+        letter-spacing: 0.1px;
+      }
+      .initiative-card button {
+        background: linear-gradient(90deg, #3498db 60%, #27ae60 100%);
+        color: white;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+        transition: background 0.3s, transform 0.2s;
+      }
+      .initiative-card:nth-child(2) button {
+        background: linear-gradient(90deg, #27ae60 60%, #3498db 100%);
+      }
+      .initiative-card:nth-child(3) button {
+        background: linear-gradient(90deg, #e67e22 60%, #f1c40f 100%);
+      }
+      .initiative-card button:hover {
+        transform: scale(1.08);
+        background: linear-gradient(90deg, #6dd5ed, #2193b0);
+        box-shadow: 0 4px 16px rgba(44,62,80,0.18);
+      }
+      /* Forms */
+      .form-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(120deg, #fff 80%, #e0eafc 100%);
+        padding: 32px 24px;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+        z-index: 1000;
+        min-width: 320px;
+        max-width: 90vw;
+        animation: fadeInScale 0.5s;
+      }
+      @keyframes fadeInScale {
+        from { opacity: 0; transform: scale(0.8) translate(-50%, -50%);}
+        to { opacity: 1; transform: scale(1) translate(-50%, -50%);}
+      }
+      .form-popup h2 {
+        margin-top: 0;
+        color: #3498db;
+        font-size: 1.5rem;
+        margin-bottom: 18px;
+      }
+      .form-popup input, .form-popup textarea, .form-popup select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 14px;
+        border-radius: 6px;
+        border: 1px solid #dbeafe;
+        font-size: 1rem;
+        transition: border 0.2s;
+      }
+      .form-popup input:focus, .form-popup textarea:focus, .form-popup select:focus {
+        border: 1.5px solid #3498db;
+        outline: none;
+      }
+      .form-popup button[type="submit"] {
+        background: linear-gradient(90deg, #3498db 60%, #27ae60 100%);
+        color: white;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+        transition: background 0.3s, transform 0.2s;
+      }
+      .form-popup button[type="submit"]:hover {
+        background: linear-gradient(90deg, #6dd5ed, #2193b0);
+        transform: scale(1.05);
+      }
+      .form-close {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        background: none;
+        border: none;
+        font-size: 1.3rem;
+        color: #888;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .form-close:hover {
+        color: #e74c3c;
+      }
+      /* Overlay for popup */
+      .form-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(44,62,80,0.18);
+        z-index: 999;
+      }
+      /* Responsive */
+      @media (max-width: 900px) {
+        #initiatives > div {
+          flex-direction: column;
+          align-items: center;
+        }
+        .initiative-card {
+          width: 90vw;
+          margin-bottom: 24px;
+        }
+        #initiatives {
+          padding: 24px 8px;
+          border-radius: 0 0 18px 18px;
+        }
+        .form-popup {
+          min-width: 90vw;
+          padding: 18px 8px;
+        }
+        .form-popup h2 {
+          font-size: 1.2rem;
+        }
+        .form-popup input,
+        .form-popup textarea,
+        .form-popup select {
+          font-size: 0.95rem;
+          padding: 8px;
+        }
+      }
+      @media (max-width: 600px) {
+        #initiatives h2 {
+          font-size: 2rem;
+        }
+        #initiatives p {
+          font-size: 1rem;
+        }
+        .initiative-card {
+          width: 98vw;
+          padding: 16px 6px;
+        }
+        .form-popup {
+          min-width: 98vw;
+          padding: 12px 4px;
+        }
+      }
+    </style>
+</head>
+<body>
+    <section id="initiatives">
+      <h2>Our Initiatives</h2>
+      <p style="color: #dbeafe;">Join hands with us to create real change in society</p>
+      <div>
+        <!-- Free Education -->
+        <div class="initiative-card">
+          <h3>📚 Education For Every Child</h3>
+          <p>No child should stop learning because of money. Apply today and continue your journey.</p>
+          <button onclick="openForm('educationForm')">Apply Now</button>
+        </div>
+        <!-- Adopt a Student -->
+        <div class="initiative-card">
+          <h3>🤝 Adopt a needy child 
+            
+          </h3>
+          <p>Give a Child the Gift of Education – Your Support Can Change Their Tomorrow.</p>
+          <button onclick="openForm('studentForm')">Start Helping</button>
+        </div>
+        <!-- Adopt a Cow -->
+        <div class="initiative-card">
+          <h3>🐄 Care for a Cow, Care for Nature</h3>
+          <p>Give love and shelter to India’s stray cows. Adopt or support to make a difference.</p>
+          <button onclick="openForm('cowForm')">Adopt Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overlay for popup -->
+    <div class="form-overlay" id="formOverlay" onclick="closeForm()"></div>
+
+    <!-- Forms (Hidden initially) -->
+    <div id="educationForm" class="form-popup">
+      <button class="form-close" onclick="closeForm()">&times;</button>
+      <h2>Apply for Free Education</h2>
+      <form action="YOUR_FORMSPREE_URL" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="text" name="class" placeholder="Class / Current Education Level" required>
+        <input type="text" name="parent" placeholder="Parent/Guardian Name" required>
+        <input type="tel" name="phone" placeholder="Contact Number" required>
+        <textarea name="reason" placeholder="Reason for Financial Help" required></textarea>
+        <input type="text" name="location" placeholder="City, State, Pincode" required>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div id="studentForm" class="form-popup">
+      <button class="form-close" onclick="closeForm()">&times;</button>
+      <h2>Adopt a Student</h2>
+      <form action="YOUR_FORMSPREE_URL" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="occupation" placeholder="Occupation">
+        <input type="text" name="support" placeholder="Support Amount (Monthly/Yearly)">
+        <textarea name="reason" placeholder="Why do you want to adopt a student?" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div id="cowForm" class="form-popup">
+      <button class="form-close" onclick="closeForm()">&times;</button>
+      <h2>Adopt a Cow</h2>
+      <form action="YOUR_FORMSPREE_URL" method="POST">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="address" placeholder="Address" required>
+        <select name="helpType">
+          <option value="">Choose Support Type</option>
+          <option value="shelter">Provide Shelter</option>
+          <option value="finance">Financial Help</option>
+        </select>
+        <textarea name="message" placeholder="Additional Message"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      function openForm(formId) {
+        document.getElementById("formOverlay").style.display = "block";
+        document.getElementById("educationForm").style.display = "none";
+        document.getElementById("studentForm").style.display = "none";
+        document.getElementById("cowForm").style.display = "none";
+        document.getElementById(formId).style.display = "block";
+      }
+      function closeForm() {
+        document.getElementById("formOverlay").style.display = "none";
+        document.getElementById("educationForm").style.display = "none";
+        document.getElementById("studentForm").style.display = "none";
+        document.getElementById("cowForm").style.display = "none";
+      }
+      // Close popup on ESC key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") closeForm();
+      });
+    </script>
+</body>
+</html>
