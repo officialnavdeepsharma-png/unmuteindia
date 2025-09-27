@@ -726,6 +726,21 @@
     .navbar-toggle-icon::after {
       top: 8px;
     }
+    /* Post Comment link */
+.comment-link {
+  background: linear-gradient(90deg, #2563eb, #1d4ed8); /* blue gradient */
+  color: var(--white) !important;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 10px 20px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.comment-link:hover {
+  background: linear-gradient(90deg, #1d4ed8, #1e40af);
+  transform: scale(1.05);
+}
+
 
     /* Responsive Navbar */
     @media (max-width: 768px) {
@@ -738,10 +753,11 @@
       .navbar-links {
         position: absolute;
         top: 60px;
+        height: 180px;
         right: 0;
         background: var(--white);
         flex-direction: column;
-        gap: 0;
+        gap: 32px;
         width: 180px;
         box-shadow: var(--shadow-md);
         border-radius: 0 0 12px 12px;
@@ -868,6 +884,8 @@
       <ul class="navbar-links">
         <li><a href="#">Home</a></li>
         <li><a href="services.html" class="highlight-link">Our Services</a></li>
+         <!-- ✅ New link -->
+      <li><a href="comment.html" class="comment-link">Post   Comment</a></li>
       </ul>
     </div>
   </nav>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Political Comments</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f4f9;
+    }
+    .comment-link {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .comment-link:hover {
+      background: #0056b3;
+    }
+    .form-box {
+      margin-top: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Link -->
+  <a href="#commentForm" class="comment-link">Post Your Political Comment</a>
+
+  <!-- Comment Form -->
+  <div class="form-box">
+    <h2>Post Your Political Comment</h2>
+    <form id="commentForm">
+      <label>Name:</label>
+      <input type="text" name="name" required>
+      
+      <label>Email:</label>
+      <input type="email" name="email" required>
+      
+      <label>Your Comment:</label>
+      <textarea name="comment" rows="4" required></textarea>
+      
+      <button type="submit">Submit</button>
+    </form>
+    <p>After posting, <a href="https://www.instagram.com/" target="_blank">Share this on Instagram</a></p>
+  </div>
+
+  <script>
+    document.getElementById("commentForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      alert("✅ Your comment has been submitted!");
+    });
+  </script>
+
+</body>
+</html>
